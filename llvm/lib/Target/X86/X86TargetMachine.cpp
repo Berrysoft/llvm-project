@@ -223,6 +223,8 @@ getEffectiveX86CodeModel(const Triple &TT, std::optional<CodeModel::Model> CM,
   }
   if (JIT)
     return Is64Bit ? CodeModel::Large : CodeModel::Small;
+  if (TT.isWindowsCygwinEnvironment())
+    return Is64Bit ? CodeModel::Medium : CodeModel::Small;
   return CodeModel::Small;
 }
 
